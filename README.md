@@ -1,7 +1,20 @@
-# car_price_prediction
-This is first pet-project car-price prediction.
+# Project car price prediciton
 
-Folder `research` contains jupyter notebook with EDA and data-prepation.
+## Usage
 
-I chose Ridge regression as type of model for car-price prediction. The metric is MAE (mean absolute error) because data contains extremely high price.
-There are 2 models for type of cars: premium and regular.
+App can predict car price by entering some parameters.
+
+## Installation
+
+blabla
+## Example running
+
+## Project structure
+
+Folder `research` contains train and test datasets (folder `data`), jupyter notebook (file `processing_lesson.ipynb`) with EDA, data preparation, training models.
+
+## Model selection and score
+
+The Ridge regression is used as model for car-price prediction. There are 2 models for type of cars: premium and regular.
+The metric is MAE (mean absolute error) because data contains extremely high price. 
+On test dataset MAE is ~1780. 
