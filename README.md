@@ -11,7 +11,7 @@ blabla
 
 ## Project structure
 
-Folder `research` contains train and test datasets (folder `data`), jupyter notebook (file `processing_lesson.ipynb`) with EDA, data preparation, training models.
+- Folder `research` contains train and test datasets (folder `data`), jupyter notebook (file `processing_lesson.ipynb`) with EDA, data preparation, training models.
 
 ## Model selection and score
 
