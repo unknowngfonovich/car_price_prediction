@@ -1,49 +1,4 @@
-from fastapi import FastAPI
 from pydantic import BaseModel, validator
-import pandas as pd
-import joblib
-import os
-from pydantic.errors import PathNotExistsError
-from sklearn.pipeline import Pipeline
-
-class PriceEstimator:
-
-    """
-
-    Class for 
-
-    :param path_to_model: path to file where model with extension .pkl is located
-    :type: str
-
-    """
-
-    def __init__(self, path_to_model: str) -> None:
-        self.model = self.load_model(path_to_model)
-        self.path_model = path_to_model
-
-    def load_model(self, path: str) -> Pipeline:
-
-        """
-        Method to load a model with extension .pkl by path
-
-        :param path:    path to location of model
-        :type path:     str
-
-        """
-        if os.path.isfile(path):
-            return joblib.load(path)
-        else:
-            raise PathNotExistsError(f'Model with path `{path}` can not be found')
-
-    def make_prediction(self, data: pd.DataFrame) -> float:
-
-        
-        """
-        
-
-        """
-        
-        return self.model.predict(data)
 
 class Car(BaseModel):
 
@@ -65,9 +20,14 @@ class Car(BaseModel):
     :param engineSize:      ex.\n
     :type engineSize:       float\n
     :param car_maker:       ex.\n
-    :type car_maker:        str
-    """
+    :type car_maker:        str\n
 
+
+    There are validators for each car parameter (check if value is negative or not,\n
+    check if value is outer of bound
+    )
+
+    """
 
     model:          str
     year:           int
@@ -78,8 +38,6 @@ class Car(BaseModel):
     mpg:            float
     engineSize:     float
     car_maker:      str
-
-
     
     @validator('model')
     def check_model(cls, value):
@@ -130,6 +88,7 @@ class Car(BaseModel):
             raise ValueError('Transmission is empty!')
         return value
 
+
 class Price(BaseModel):
     """
     Validation class for result of prediction
@@ -143,23 +102,3 @@ class Price(BaseModel):
         if value <= 0:
             raise ValueError('Price can not be negative!')
         return value
-
-
-app = FastAPI()
-premium_model, regular_model = PriceEstimator('models_ml/prem_model.pkl'), PriceEstimator('models_ml/reg_model.pkl')
-
-@app.get('/')
-def status_main():
-    return {"message": "say hello"}
-
-@app.post('/make_prediction', response_model=Price)
-def make_predict(car: Car) -> Price:
-    data = pd.DataFrame(data=car.dict(), index=[0])
-    result = premium_model.make_prediction(data)[0] if car.car_maker.lower() in ('bmw', 'mercedes', 'audi') else regular_model.make_prediction(data)[0]
-    return {
-        'car': car.dict(),
-        'price': result
-        }
-
-    
-

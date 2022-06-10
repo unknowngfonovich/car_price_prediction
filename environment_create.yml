@@ -1,0 +1,7 @@
+name: env
+channels:
+  - conda-forge
+denepdencies:
+  - pandas
+  - scikit-learn
+  - fastapi
