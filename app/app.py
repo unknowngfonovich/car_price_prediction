@@ -11,7 +11,7 @@ premium_model, regular_model = PriceEstimator('app/core/ml/models_storage/prem_m
 
 @app.get('/')
 def status_main():
-    return {"message": "say hello"}
+    return {"message": "Welcome to Car Price prediction API"}
 
 @app.post('/make_prediction', response_model=Price)
 def make_predict(car: Car) -> Price:

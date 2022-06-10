@@ -4,14 +4,16 @@
 
 App can predict car price by entering some parameters.
 
-## Installation
+## Installation and running
 
-blabla
-## Example running
+- (Docker running in progress)
+- If you have conda - create environment from file `environment_create.yml`
+- Activate environment and run command `uvicorn app.app:app --reload`
 
 ## Project structure
 
-- Folder `research` contains train and test datasets (folder `data`), jupyter notebook (file `processing_lesson.ipynb`) with EDA, data preparation, training models.
+- `research` contains train and test datasets (folder `data`), jupyter notebook (file `processing_lesson.ipynb`) with EDA, data preparation, training models.
+- `app` contains core files (folder `core` - ml models, pydantic schemas), main file - `app.py` 
 
 ## Model selection and score
 
